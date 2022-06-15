@@ -22,7 +22,7 @@ app.listen(port, () => {
 
 dbConnect();
 
-const io = socket(port, {
+const io = socket(5000, {
     cors: {
         origin: "*",
         credentials: true,
@@ -40,7 +40,7 @@ io.on("connection", (socket) => {
 socket.on("send-msg", (data) => {
     const sendUserSocket = onlineUsers.get(data.to);
     if (sendUserSocket) {
-        socket.to(sendUserSocket).emit("receive-msg", data.msg);
+        socket.to(sendUserSocket).emit("receive-msg", data.message);
     }
 });
 
